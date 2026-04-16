@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>🎂 Birthday Wish ✨</title>
+  <title>🎂 Happy Birthday! ✨</title>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -46,7 +46,7 @@
     /* Screens / sections */
     .screen {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       text-align: center;
       display: none;
@@ -82,7 +82,7 @@
 
     /* Message text (Happy, Birthday, Name) */
     .big-message {
-      font-size: 5rem;
+      font-size: 5.5rem;
       font-weight: 800;
       color: #ffe4f2;
       text-shadow: 0 0 20px #ff69b4;
@@ -90,117 +90,182 @@
     }
 
     .sub-message {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 600;
       color: #ffb6c1;
       margin-top: 0.5rem;
     }
 
     .name-message {
-      font-size: 4.5rem;
+      font-size: 5rem;
       font-weight: 700;
-      color: #fff0f5;
       background: linear-gradient(135deg, #ffb6c1, #ff69b4);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       filter: drop-shadow(0 0 20px #ff1493);
     }
 
-    /* Gallery / album styles */
+    /* Gallery / album styles – improved design */
     .gallery-title {
-      font-size: 2rem;
+      font-size: 2.4rem;
       margin-bottom: 1.5rem;
       color: #ffe4e1;
+      font-weight: 600;
+      letter-spacing: 2px;
     }
 
-    .album-container {
+    .album-wrapper {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      width: 100%;
     }
 
-    .photo-frame {
-      width: 280px;
-      height: 320px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
+    .main-photo-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
       border: 2px solid rgba(255, 192, 203, 0.6);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 105, 180, 0.3);
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
+      padding: 16px;
     }
 
-    .photo-frame img {
+    .photo-frame-large {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .photo-frame-large img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 16px;
-      transition: transform 0.3s ease;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-frame-large img:hover {
+      transform: scale(1.02);
+    }
+
+    .album-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 24px;
     }
 
     .nav-btn {
       background: rgba(255, 182, 193, 0.2);
       border: 2px solid #ffb6c1;
       color: #ffb6c1;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      font-size: 1.8rem;
+      font-size: 2rem;
       cursor: pointer;
       backdrop-filter: blur(8px);
       transition: all 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
     .nav-btn:hover {
       background: #ffb6c1;
       color: #1a0f1d;
       transform: scale(1.1);
-      box-shadow: 0 0 20px #ff69b4;
+      box-shadow: 0 0 25px #ff69b4;
     }
 
     .photo-counter {
-      margin-top: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #ffd1dc;
+      font-weight: 500;
     }
 
-    /* Heart shape gallery (final love shape) */
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,192,203,0.5);
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .thumbnail.active-thumb {
+      opacity: 1;
+      border: 3px solid #ff69b4;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff69b4;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Heart shape gallery */
     .heart-gallery {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
+    }
+
+    .heart-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffe4f2;
+      text-shadow: 0 0 15px #ff1493;
+      margin-bottom: 0.5rem;
     }
 
     .heart-shape {
       display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-template-rows: repeat(4, 100px);
-      gap: 8px;
+      grid-template-columns: repeat(3, 110px);
+      grid-template-rows: repeat(4, 110px);
+      gap: 12px;
       justify-content: center;
-      margin: 20px 0;
+      margin: 10px 0;
     }
 
     .heart-cell {
-      width: 100px;
-      height: 100px;
-      border-radius: 16px;
-      background: rgba(255, 192, 203, 0.2);
+      width: 110px;
+      height: 110px;
+      border-radius: 20px;
+      background: rgba(255, 192, 203, 0.15);
       backdrop-filter: blur(4px);
-      border: 1.5px solid #ffb6c1;
+      border: 2px solid #ffb6c1;
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .heart-cell:hover {
+      transform: scale(1.02);
     }
 
     .heart-cell img {
@@ -217,25 +282,26 @@
     }
 
     .heart-caption {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
       color: #ffe4f2;
-      text-shadow: 0 0 15px #ff1493;
+      text-shadow: 0 0 20px #ff1493;
+      margin-top: 10px;
     }
 
-    /* Button styles */
     .btn {
       background: rgba(255, 182, 193, 0.2);
       border: 2px solid #ffb6c1;
       color: white;
-      padding: 12px 28px;
-      font-size: 1.2rem;
-      border-radius: 40px;
+      padding: 14px 36px;
+      font-size: 1.3rem;
+      border-radius: 60px;
       backdrop-filter: blur(8px);
       cursor: pointer;
       margin-top: 2rem;
       font-weight: 600;
       transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
     .btn:hover {
@@ -262,73 +328,21 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      .big-message { font-size: 3.5rem; }
-      .sub-message { font-size: 2.8rem; }
-      .name-message { font-size: 3rem; }
+      .big-message { font-size: 3.8rem; }
+      .sub-message { font-size: 3.2rem; }
+      .name-message { font-size: 3.5rem; }
       .countdown-number { font-size: 8rem; }
-      .photo-frame { width: 220px; height: 260px; }
-      .heart-shape { grid-template-columns: repeat(3, 70px); grid-template-rows: repeat(4, 70px); }
-      .heart-cell { width: 70px; height: 70px; }
-    }
-
-    /* Name input popup style (optional) */
-    .name-modal {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .name-card {
-      background: #2a1a2a;
-      padding: 2rem;
-      border-radius: 32px;
-      border: 2px solid #ffb6c1;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-    .name-card input {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.5rem;
-      border-radius: 60px;
-      border: none;
-      background: #1e0f1a;
-      color: #ffb6c1;
-      text-align: center;
-      margin: 20px 0;
-      border: 1px solid #ff69b4;
-    }
-    .name-card button {
-      background: #ffb6c1;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 60px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #1e0f1a;
-      cursor: pointer;
+      .main-photo-container { max-width: 340px; }
+      .heart-shape { grid-template-columns: repeat(3, 75px); grid-template-rows: repeat(4, 75px); }
+      .heart-cell { width: 75px; height: 75px; }
+      .thumbnail { width: 50px; height: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Canvas for falling pink particles (always active) -->
+  <!-- Canvas for falling pink particles -->
   <canvas id="particle-canvas"></canvas>
-
-  <!-- Optional name input modal (shows only if no name in URL) -->
-  <div id="nameModal" class="name-modal" style="display: none;">
-    <div class="name-card">
-      <h2 style="color:#ffe4f2; margin-bottom: 10px;">✨ Whose birthday? ✨</h2>
-      <input type="text" id="nameInput" placeholder="Enter name" maxlength="20" value="Friend">
-      <br>
-      <button id="startWithNameBtn">Let's Celebrate 🎉</button>
-    </div>
-  </div>
 
   <div class="app-container">
     <!-- SCREEN 1: COUNTDOWN -->
@@ -340,35 +354,39 @@
     <!-- SCREEN 2: HAPPY BIRTHDAY MESSAGES -->
     <div id="messageScreen" class="screen">
       <div id="happyText" class="big-message" style="opacity:0;">Happy</div>
-      <div id="birthdayText" class="sub-message" style="opacity:0; margin-top: 0.5rem;">Birthday</div>
+      <div id="birthdayText" class="sub-message" style="opacity:0;">Birthday</div>
       <div id="nameText" class="name-message" style="opacity:0;"></div>
     </div>
 
-    <!-- SCREEN 3: PHOTO ALBUM (carousel) -->
+    <!-- SCREEN 3: PHOTO ALBUM (improved carousel) -->
     <div id="galleryScreen" class="screen">
-      <div class="gallery-title"><i class="fas fa-images" style="margin-right: 12px;"></i> Sweet Memories</div>
-      <div class="album-container">
-        <button class="nav-btn" id="prevPhotoBtn"><i class="fas fa-chevron-left"></i></button>
-        <div class="photo-frame">
-          <img id="galleryImage" src="" alt="Memory">
+      <div class="gallery-title"><i class="fas fa-images" style="margin-right: 14px;"></i> Sweet Memories</div>
+      <div class="album-wrapper">
+        <div class="main-photo-container">
+          <div class="photo-frame-large">
+            <img id="galleryImage" src="" alt="Memory">
+          </div>
         </div>
-        <button class="nav-btn" id="nextPhotoBtn"><i class="fas fa-chevron-right"></i></button>
+        <div class="album-nav">
+          <button class="nav-btn" id="prevPhotoBtn"><i class="fas fa-chevron-left"></i></button>
+          <span class="photo-counter" id="photoCounter">1 / 6</span>
+          <button class="nav-btn" id="nextPhotoBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="thumbnails" id="thumbnailContainer"></div>
       </div>
-      <div class="photo-counter" id="photoCounter">1 / 6</div>
-      <button class="btn" id="toHeartBtn"><i class="fas fa-heart" style="margin-right: 8px;"></i> See the Love</button>
     </div>
 
     <!-- SCREEN 4: HEART SHAPE (love shape with pictures) -->
     <div id="heartScreen" class="screen">
       <div class="heart-gallery">
-        <div style="font-size: 2.2rem; margin-bottom: 5px;"><i class="fas fa-heart" style="color:#ff69b4;"></i> With Love <i class="fas fa-heart" style="color:#ff69b4;"></i></div>
+        <div class="heart-title"><i class="fas fa-heart" style="color:#ff69b4;"></i> With All My Love <i class="fas fa-heart" style="color:#ff69b4;"></i></div>
         <div id="heartGrid" class="heart-shape">
-          <!-- Grid cells will be populated via JS -->
+          <!-- Grid cells populated via JS -->
         </div>
         <div class="heart-caption">
           <span id="finalNameDisplay"></span> 💖
         </div>
-        <button class="btn" id="restartBtn"><i class="fas fa-redo-alt"></i> Celebrate Again</button>
+        <button class="btn" id="restartBtn"><i class="fas fa-redo-alt" style="margin-right: 8px;"></i> Celebrate Again</button>
       </div>
     </div>
   </div>
@@ -377,19 +395,22 @@
     (function(){
       "use strict";
 
-      // ---------- CONFIGURATION ----------
-      // Sample images (replace with your own if desired)
+      // ---------- CONFIGURATION (EDIT NAME HERE) ----------
+      const CONFIG = {
+        celebrantName: "Sophia",  // <-- CHANGE THIS TO THE BIRTHDAY PERSON'S NAME
+      };
+
+      // Sample images – replace with your own if desired
       const PHOTO_ALBUM = [
-        "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=400", // cake
-        "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?auto=compress&cs=tinysrgb&w=400", // balloons
-        "https://images.pexels.com/photos/1198802/pexels-photo-1198802.jpeg?auto=compress&cs=tinysrgb&w=400", // flowers
-        "https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=400", // gift
-        "https://images.pexels.com/photos/5877419/pexels-photo-5877419.jpeg?auto=compress&cs=tinysrgb&w=400", // confetti
-        "https://images.pexels.com/photos/1721604/pexels-photo-1721604.jpeg?auto=compress&cs=tinysrgb&w=400"  // candles
+        "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=600", // cake
+        "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?auto=compress&cs=tinysrgb&w=600", // balloons
+        "https://images.pexels.com/photos/1198802/pexels-photo-1198802.jpeg?auto=compress&cs=tinysrgb&w=600", // flowers
+        "https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=600", // gift
+        "https://images.pexels.com/photos/5877419/pexels-photo-5877419.jpeg?auto=compress&cs=tinysrgb&w=600", // confetti
+        "https://images.pexels.com/photos/1721604/pexels-photo-1721604.jpeg?auto=compress&cs=tinysrgb&w=600"  // candles
       ];
 
-      // Heart shape grid mapping (3 cols x 4 rows) using 0-based indices.
-      // true = filled cell (shows an image), false = empty space.
+      // Heart shape grid mapping (3 cols x 4 rows) using boolean pattern (true = image, false = empty)
       const HEART_PATTERN = [
         [ true,  true,  true ],  // row0
         [ true,  true,  true ],  // row1
@@ -397,20 +418,20 @@
         [ true,  true,  true ]   // row3
       ];
 
-      // Image list for heart cells (can reuse album images or dedicated set)
+      // Heart images (different set, more romantic)
       const HEART_IMAGES = [
-        "https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=200", // roses
-        "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=200", // strawberries
-        "https://images.pexels.com/photos/1485630/pexels-photo-1485630.jpeg?auto=compress&cs=tinysrgb&w=200", // heart cookies
-        "https://images.pexels.com/photos/6690142/pexels-photo-6690142.jpeg?auto=compress&cs=tinysrgb&w=200", // pink petals
-        "https://images.pexels.com/photos/1211918/pexels-photo-1211918.jpeg?auto=compress&cs=tinysrgb&w=200", // chocolates
-        "https://images.pexels.com/photos/1648377/pexels-photo-1648377.jpeg?auto=compress&cs=tinysrgb&w=200", // heart balloons
-        "https://images.pexels.com/photos/1648379/pexels-photo-1648379.jpeg?auto=compress&cs=tinysrgb&w=200", // pink cake
-        "https://images.pexels.com/photos/1410236/pexels-photo-1410236.jpeg?auto=compress&cs=tinysrgb&w=200"  // cupcake
+        "https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=300", // roses
+        "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=300", // strawberries
+        "https://images.pexels.com/photos/1485630/pexels-photo-1485630.jpeg?auto=compress&cs=tinysrgb&w=300", // heart cookies
+        "https://images.pexels.com/photos/6690142/pexels-photo-6690142.jpeg?auto=compress&cs=tinysrgb&w=300", // pink petals
+        "https://images.pexels.com/photos/1211918/pexels-photo-1211918.jpeg?auto=compress&cs=tinysrgb&w=300", // chocolates
+        "https://images.pexels.com/photos/1648377/pexels-photo-1648377.jpeg?auto=compress&cs=tinysrgb&w=300", // heart balloons
+        "https://images.pexels.com/photos/1648379/pexels-photo-1648379.jpeg?auto=compress&cs=tinysrgb&w=300", // pink cake
+        "https://images.pexels.com/photos/1410236/pexels-photo-1410236.jpeg?auto=compress&cs=tinysrgb&w=300"  // cupcake
       ];
 
       // ---------- GLOBAL VARIABLES ----------
-      let celebrantName = "Friend";
+      const celebrantName = CONFIG.celebrantName;
       
       // DOM elements
       const countdownScreen = document.getElementById('countdownScreen');
@@ -426,19 +447,18 @@
       const photoCounter = document.getElementById('photoCounter');
       const finalNameDisplay = document.getElementById('finalNameDisplay');
       const heartGrid = document.getElementById('heartGrid');
+      const thumbnailContainer = document.getElementById('thumbnailContainer');
       
       const prevBtn = document.getElementById('prevPhotoBtn');
       const nextBtn = document.getElementById('nextPhotoBtn');
-      const toHeartBtn = document.getElementById('toHeartBtn');
       const restartBtn = document.getElementById('restartBtn');
-      
-      const nameModal = document.getElementById('nameModal');
-      const nameInput = document.getElementById('nameInput');
-      const startWithNameBtn = document.getElementById('startWithNameBtn');
 
       let currentPhotoIndex = 0;
       let countdownInterval = null;
-      let messageTimeout = null;
+
+      // Set the name in the UI
+      nameText.textContent = celebrantName;
+      finalNameDisplay.textContent = celebrantName;
 
       // ---------- FALLING PINK PARTICLES (Canvas) ----------
       const canvas = document.getElementById('particle-canvas');
@@ -470,17 +490,14 @@
             ctx.arc(p.x, p.y, p.size/2, 0, Math.PI*2);
             ctx.fill();
           } else {
-            // draw tiny heart
             ctx.font = `${p.size}px "Segoe UI Emoji", "Apple Color Emoji", sans-serif`;
             ctx.fillStyle = p.color;
             ctx.fillText('💖', p.x - p.size/2, p.y + p.size/3);
           }
           
-          // update position
           p.y += p.speedY;
           p.x += p.speedX;
           
-          // reset if off screen
           if (p.y > height + 50) {
             p.y = -20;
             p.x = Math.random() * width;
@@ -504,42 +521,6 @@
       resizeCanvas();
       drawParticles();
 
-      // ---------- NAME HANDLING (URL or modal) ----------
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-      }
-
-      function setCelebrantName(name) {
-        celebrantName = name.trim() || "Friend";
-        nameText.textContent = celebrantName;
-        finalNameDisplay.textContent = celebrantName;
-      }
-
-      function checkNameAndStart() {
-        const urlName = getQueryParam('name');
-        if (urlName) {
-          setCelebrantName(urlName);
-          startCountdown();
-        } else {
-          // show modal to enter name
-          nameModal.style.display = 'flex';
-        }
-      }
-
-      startWithNameBtn.addEventListener('click', () => {
-        const entered = nameInput.value.trim();
-        setCelebrantName(entered || "Friend");
-        nameModal.style.display = 'none';
-        startCountdown();
-      });
-
-      nameInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') {
-          startWithNameBtn.click();
-        }
-      });
-
       // ---------- COUNTDOWN ----------
       function startCountdown() {
         let count = 5;
@@ -551,7 +532,6 @@
           }
           if (count < 0) {
             clearInterval(countdownInterval);
-            // switch to message screen
             switchScreen(countdownScreen, messageScreen);
             showMessages();
           }
@@ -564,53 +544,80 @@
       }
 
       function showMessages() {
-        // Show "Happy"
-        happyText.style.opacity = '0';
         happyText.style.animation = 'none';
-        happyText.offsetHeight; // reflow
+        happyText.offsetHeight;
         happyText.style.animation = 'fadeSlide 0.8s forwards';
         
         setTimeout(() => {
-          birthdayText.style.opacity = '0';
           birthdayText.style.animation = 'none';
           birthdayText.offsetHeight;
           birthdayText.style.animation = 'fadeSlide 0.8s forwards';
         }, 900);
 
         setTimeout(() => {
-          nameText.style.opacity = '0';
           nameText.style.animation = 'none';
           nameText.offsetHeight;
           nameText.style.animation = 'fadeSlide 0.8s forwards';
         }, 1800);
 
-        // After messages, move to gallery after a pause
         setTimeout(() => {
           switchScreen(messageScreen, galleryScreen);
+          buildThumbnails();
           loadGalleryImage(0);
         }, 3500);
       }
 
-      // ---------- GALLERY / ALBUM ----------
+      // ---------- GALLERY / ALBUM with thumbnails ----------
+      function buildThumbnails() {
+        thumbnailContainer.innerHTML = '';
+        PHOTO_ALBUM.forEach((src, idx) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'thumbnail';
+          if (idx === 0) thumb.classList.add('active-thumb');
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Memory ${idx+1}`;
+          thumb.appendChild(img);
+          thumb.addEventListener('click', () => {
+            loadGalleryImage(idx);
+          });
+          thumbnailContainer.appendChild(thumb);
+        });
+      }
+
+      function updateThumbnailActive(index) {
+        const thumbs = document.querySelectorAll('.thumbnail');
+        thumbs.forEach((thumb, i) => {
+          if (i === index) thumb.classList.add('active-thumb');
+          else thumb.classList.remove('active-thumb');
+        });
+      }
+
       function loadGalleryImage(index) {
         if (PHOTO_ALBUM.length === 0) return;
         currentPhotoIndex = (index + PHOTO_ALBUM.length) % PHOTO_ALBUM.length;
         galleryImage.src = PHOTO_ALBUM[currentPhotoIndex];
         photoCounter.textContent = `${currentPhotoIndex+1} / ${PHOTO_ALBUM.length}`;
+        updateThumbnailActive(currentPhotoIndex);
       }
 
-      prevBtn.addEventListener('click', () => {
-        loadGalleryImage(currentPhotoIndex - 1);
-      });
-      
-      nextBtn.addEventListener('click', () => {
-        loadGalleryImage(currentPhotoIndex + 1);
-      });
+      // Next photo handler with auto transition to heart after last photo
+      function handleNextPhoto() {
+        if (currentPhotoIndex === PHOTO_ALBUM.length - 1) {
+          // It's the last photo → go directly to heart screen
+          switchScreen(galleryScreen, heartScreen);
+          buildHeartGrid();
+        } else {
+          loadGalleryImage(currentPhotoIndex + 1);
+        }
+      }
 
-      toHeartBtn.addEventListener('click', () => {
-        switchScreen(galleryScreen, heartScreen);
-        buildHeartGrid();
-      });
+      function handlePrevPhoto() {
+        loadGalleryImage(currentPhotoIndex - 1);
+      }
+
+      prevBtn.addEventListener('click', handlePrevPhoto);
+      nextBtn.addEventListener('click', handleNextPhoto);
 
       // ---------- HEART SHAPE ----------
       function buildHeartGrid() {
@@ -636,32 +643,25 @@
 
       // Restart experience
       restartBtn.addEventListener('click', () => {
-        // Reset everything
         clearInterval(countdownInterval);
-        // Show countdown again
         switchScreen(heartScreen, countdownScreen);
         countdownDisplay.textContent = '5';
-        // reset text opacity
         happyText.style.opacity = '0';
         birthdayText.style.opacity = '0';
         nameText.style.opacity = '0';
-        // reset gallery index
         currentPhotoIndex = 0;
-        // restart countdown
         startCountdown();
       });
 
       // ---------- START THE APP ----------
-      // If modal not needed, countdown starts after name resolution
       window.addEventListener('load', () => {
-        // Preload images for gallery
+        // Preload images
         PHOTO_ALBUM.forEach(src => { const img = new Image(); img.src = src; });
         HEART_IMAGES.forEach(src => { const img = new Image(); img.src = src; });
         
-        checkNameAndStart();
+        startCountdown();
       });
 
-      // Optional: clicking outside modal? simple.
     })();
   </script>
 </body>
