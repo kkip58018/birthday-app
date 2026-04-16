@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>🎂 Happy Birthday! ✨</title>
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Canvas Confetti Library for extra celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
   <style>
     * {
       margin: 0;
@@ -21,7 +23,6 @@
       color: #fff;
     }
 
-    /* Canvas for falling pink particles */
     #particle-canvas {
       position: fixed;
       top: 0;
@@ -32,7 +33,6 @@
       z-index: 1;
     }
 
-    /* Main container */
     .app-container {
       position: relative;
       z-index: 10;
@@ -43,7 +43,6 @@
       padding: 1.5rem;
     }
 
-    /* Screens / sections */
     .screen {
       width: 100%;
       max-width: 1000px;
@@ -62,7 +61,7 @@
       opacity: 1;
     }
 
-    /* Countdown screen */
+    /* Countdown */
     .countdown-number {
       font-size: 12rem;
       font-weight: 800;
@@ -71,7 +70,6 @@
       line-height: 1;
       animation: pulse 1s infinite;
     }
-
     .countdown-label {
       font-size: 2rem;
       letter-spacing: 8px;
@@ -80,7 +78,7 @@
       margin-top: 1rem;
     }
 
-    /* Message text (Happy, Birthday, Name) */
+    /* Messages */
     .big-message {
       font-size: 5.5rem;
       font-weight: 800;
@@ -88,14 +86,12 @@
       text-shadow: 0 0 20px #ff69b4;
       line-height: 1.3;
     }
-
     .sub-message {
       font-size: 4.5rem;
       font-weight: 600;
       color: #ffb6c1;
       margin-top: 0.5rem;
     }
-
     .name-message {
       font-size: 5rem;
       font-weight: 700;
@@ -107,7 +103,7 @@
       filter: drop-shadow(0 0 20px #ff1493);
     }
 
-    /* Gallery / album styles – improved design */
+    /* Album */
     .gallery-title {
       font-size: 2.4rem;
       margin-bottom: 1.5rem;
@@ -115,14 +111,12 @@
       font-weight: 600;
       letter-spacing: 2px;
     }
-
     .album-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
     }
-
     .main-photo-container {
       width: 100%;
       max-width: 500px;
@@ -135,15 +129,12 @@
       overflow: hidden;
       padding: 16px;
     }
-
     .photo-frame-large {
       width: 100%;
       aspect-ratio: 1 / 1.1;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
     }
-
     .photo-frame-large img {
       width: 100%;
       height: 100%;
@@ -151,11 +142,6 @@
       display: block;
       transition: transform 0.4s ease;
     }
-
-    .photo-frame-large img:hover {
-      transform: scale(1.02);
-    }
-
     .album-nav {
       display: flex;
       align-items: center;
@@ -163,7 +149,6 @@
       gap: 2rem;
       margin-top: 24px;
     }
-
     .nav-btn {
       background: rgba(255, 182, 193, 0.2);
       border: 2px solid #ffb6c1;
@@ -180,20 +165,17 @@
       justify-content: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-
     .nav-btn:hover {
       background: #ffb6c1;
       color: #1a0f1d;
       transform: scale(1.1);
       box-shadow: 0 0 25px #ff69b4;
     }
-
     .photo-counter {
       font-size: 1.3rem;
       color: #ffd1dc;
       font-weight: 500;
     }
-
     .thumbnails {
       display: flex;
       gap: 10px;
@@ -201,7 +183,6 @@
       flex-wrap: wrap;
       justify-content: center;
     }
-
     .thumbnail {
       width: 60px;
       height: 60px;
@@ -213,28 +194,25 @@
       transition: all 0.2s;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
-
     .thumbnail.active-thumb {
       opacity: 1;
       border: 3px solid #ff69b4;
       transform: scale(1.05);
       box-shadow: 0 0 15px #ff69b4;
     }
-
     .thumbnail img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    /* Heart shape gallery */
+    /* Heart shape gallery – 7x7 grid for a perfect heart */
     .heart-gallery {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
     }
-
     .heart-title {
       font-size: 2.5rem;
       font-weight: bold;
@@ -242,51 +220,45 @@
       text-shadow: 0 0 15px #ff1493;
       margin-bottom: 0.5rem;
     }
-
     .heart-shape {
       display: grid;
-      grid-template-columns: repeat(3, 110px);
-      grid-template-rows: repeat(4, 110px);
-      gap: 12px;
+      grid-template-columns: repeat(7, 70px);
+      grid-template-rows: repeat(7, 70px);
+      gap: 8px;
       justify-content: center;
       margin: 10px 0;
     }
-
     .heart-cell {
-      width: 110px;
-      height: 110px;
-      border-radius: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
       background: rgba(255, 192, 203, 0.15);
       backdrop-filter: blur(4px);
       border: 2px solid #ffb6c1;
       overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s;
     }
-
     .heart-cell:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
     }
-
     .heart-cell img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .heart-cell.empty {
       background: transparent;
       border: none;
       backdrop-filter: none;
       box-shadow: none;
     }
-
     .heart-caption {
       font-size: 2.2rem;
       font-weight: bold;
       color: #ffe4f2;
       text-shadow: 0 0 20px #ff1493;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .btn {
@@ -303,22 +275,40 @@
       transition: 0.3s;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-
     .btn:hover {
       background: #ffb6c1;
       color: #1e0f1a;
       box-shadow: 0 0 30px #ff69b4;
     }
 
-    /* Animations */
+    /* Floating heart animation for final screen */
+    .floating-hearts {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 20;
+      text-align: center;
+    }
+    .floating-heart {
+      display: inline-block;
+      font-size: 2rem;
+      animation: floatUp 4s infinite ease-in-out;
+      margin: 0 10px;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
+    }
+
     @keyframes pulse {
       0% { transform: scale(1); opacity: 0.9; }
       50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 40px #ff69b4; }
       100% { transform: scale(1); opacity: 0.9; }
-    }
-
-    .fade-in-text {
-      animation: fadeSlide 1s forwards;
     }
 
     @keyframes fadeSlide {
@@ -326,39 +316,35 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      .heart-shape { grid-template-columns: repeat(7, 45px); grid-template-rows: repeat(7, 45px); }
+      .heart-cell { width: 45px; height: 45px; }
       .big-message { font-size: 3.8rem; }
       .sub-message { font-size: 3.2rem; }
       .name-message { font-size: 3.5rem; }
       .countdown-number { font-size: 8rem; }
-      .main-photo-container { max-width: 340px; }
-      .heart-shape { grid-template-columns: repeat(3, 75px); grid-template-rows: repeat(4, 75px); }
-      .heart-cell { width: 75px; height: 75px; }
-      .thumbnail { width: 50px; height: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Canvas for falling pink particles -->
   <canvas id="particle-canvas"></canvas>
 
   <div class="app-container">
-    <!-- SCREEN 1: COUNTDOWN -->
+    <!-- COUNTDOWN SCREEN -->
     <div id="countdownScreen" class="screen active">
       <div id="countdownDisplay" class="countdown-number">5</div>
       <div class="countdown-label">Get ready...</div>
     </div>
 
-    <!-- SCREEN 2: HAPPY BIRTHDAY MESSAGES -->
+    <!-- MESSAGE SCREEN -->
     <div id="messageScreen" class="screen">
       <div id="happyText" class="big-message" style="opacity:0;">Happy</div>
       <div id="birthdayText" class="sub-message" style="opacity:0;">Birthday</div>
       <div id="nameText" class="name-message" style="opacity:0;"></div>
     </div>
 
-    <!-- SCREEN 3: PHOTO ALBUM (improved carousel) -->
+    <!-- ALBUM SCREEN -->
     <div id="galleryScreen" class="screen">
       <div class="gallery-title"><i class="fas fa-images" style="margin-right: 14px;"></i> Sweet Memories</div>
       <div class="album-wrapper">
@@ -376,18 +362,18 @@
       </div>
     </div>
 
-    <!-- SCREEN 4: HEART SHAPE (love shape with pictures) -->
+    <!-- HEART SCREEN -->
     <div id="heartScreen" class="screen">
       <div class="heart-gallery">
         <div class="heart-title"><i class="fas fa-heart" style="color:#ff69b4;"></i> With All My Love <i class="fas fa-heart" style="color:#ff69b4;"></i></div>
-        <div id="heartGrid" class="heart-shape">
-          <!-- Grid cells populated via JS -->
-        </div>
+        <div id="heartGrid" class="heart-shape"></div>
         <div class="heart-caption">
           <span id="finalNameDisplay"></span> 💖
         </div>
         <button class="btn" id="restartBtn"><i class="fas fa-redo-alt" style="margin-right: 8px;"></i> Celebrate Again</button>
       </div>
+      <!-- Floating hearts as extra touch -->
+      <div class="floating-hearts" id="floatingHeartsContainer"></div>
     </div>
   </div>
 
@@ -395,12 +381,12 @@
     (function(){
       "use strict";
 
-      // ---------- CONFIGURATION (EDIT NAME HERE) ----------
+      // ---------- CONFIGURATION ----------
       const CONFIG = {
-        celebrantName: "Betty",  // <-- CHANGE THIS TO THE BIRTHDAY PERSON'S NAME
+        celebrantName: "Sophia",  // 👈 CHANGE THIS TO THE BIRTHDAY PERSON'S NAME
       };
 
-      // Sample images – replace with your own if desired
+      // Photo album images (replace with your own)
       const PHOTO_ALBUM = [
         "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=600", // cake
         "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?auto=compress&cs=tinysrgb&w=600", // balloons
@@ -410,27 +396,32 @@
         "https://images.pexels.com/photos/1721604/pexels-photo-1721604.jpeg?auto=compress&cs=tinysrgb&w=600"  // candles
       ];
 
-      // Heart shape grid mapping (3 cols x 4 rows) using boolean pattern (true = image, false = empty)
+      // Heart shape pattern: 7x7 grid, true = filled cell (image), false = empty
+      // This pattern forms a classic heart shape.
       const HEART_PATTERN = [
-        [ true,  true,  true ],  // row0
-        [ true,  true,  true ],  // row1
-        [ false, true,  false],  // row2
-        [ true,  true,  true ]   // row3
+        [false, true,  true,  true,  true,  true,  false], // row0
+        [true,  true,  true,  true,  true,  true,  true ], // row1
+        [true,  true,  true,  true,  true,  true,  true ], // row2
+        [true,  true,  true,  true,  true,  true,  true ], // row3
+        [false, true,  true,  true,  true,  true,  false], // row4
+        [false, false, true,  true,  true,  false, false], // row5
+        [false, false, false, true,  false, false, false]  // row6
       ];
 
-      // Heart images (different set, more romantic)
+      // Images for heart cells (romantic vibes)
       const HEART_IMAGES = [
-        "https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=300", // roses
-        "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=300", // strawberries
-        "https://images.pexels.com/photos/1485630/pexels-photo-1485630.jpeg?auto=compress&cs=tinysrgb&w=300", // heart cookies
-        "https://images.pexels.com/photos/6690142/pexels-photo-6690142.jpeg?auto=compress&cs=tinysrgb&w=300", // pink petals
-        "https://images.pexels.com/photos/1211918/pexels-photo-1211918.jpeg?auto=compress&cs=tinysrgb&w=300", // chocolates
-        "https://images.pexels.com/photos/1648377/pexels-photo-1648377.jpeg?auto=compress&cs=tinysrgb&w=300", // heart balloons
-        "https://images.pexels.com/photos/1648379/pexels-photo-1648379.jpeg?auto=compress&cs=tinysrgb&w=300", // pink cake
-        "https://images.pexels.com/photos/1410236/pexels-photo-1410236.jpeg?auto=compress&cs=tinysrgb&w=300"  // cupcake
+        "https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=200", // roses
+        "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=200", // strawberries
+        "https://images.pexels.com/photos/1485630/pexels-photo-1485630.jpeg?auto=compress&cs=tinysrgb&w=200", // heart cookies
+        "https://images.pexels.com/photos/6690142/pexels-photo-6690142.jpeg?auto=compress&cs=tinysrgb&w=200", // pink petals
+        "https://images.pexels.com/photos/1211918/pexels-photo-1211918.jpeg?auto=compress&cs=tinysrgb&w=200", // chocolates
+        "https://images.pexels.com/photos/1648377/pexels-photo-1648377.jpeg?auto=compress&cs=tinysrgb&w=200", // heart balloons
+        "https://images.pexels.com/photos/1648379/pexels-photo-1648379.jpeg?auto=compress&cs=tinysrgb&w=200", // pink cake
+        "https://images.pexels.com/photos/1410236/pexels-photo-1410236.jpeg?auto=compress&cs=tinysrgb&w=200", // cupcake
+        "https://images.pexels.com/photos/2072179/pexels-photo-2072179.jpeg?auto=compress&cs=tinysrgb&w=200", // love letter
+        "https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=200", // teddy bear
       ];
 
-      // ---------- GLOBAL VARIABLES ----------
       const celebrantName = CONFIG.celebrantName;
       
       // DOM elements
@@ -438,7 +429,6 @@
       const messageScreen = document.getElementById('messageScreen');
       const galleryScreen = document.getElementById('galleryScreen');
       const heartScreen = document.getElementById('heartScreen');
-      
       const countdownDisplay = document.getElementById('countdownDisplay');
       const happyText = document.getElementById('happyText');
       const birthdayText = document.getElementById('birthdayText');
@@ -448,7 +438,6 @@
       const finalNameDisplay = document.getElementById('finalNameDisplay');
       const heartGrid = document.getElementById('heartGrid');
       const thumbnailContainer = document.getElementById('thumbnailContainer');
-      
       const prevBtn = document.getElementById('prevPhotoBtn');
       const nextBtn = document.getElementById('nextPhotoBtn');
       const restartBtn = document.getElementById('restartBtn');
@@ -456,11 +445,10 @@
       let currentPhotoIndex = 0;
       let countdownInterval = null;
 
-      // Set the name in the UI
       nameText.textContent = celebrantName;
       finalNameDisplay.textContent = celebrantName;
 
-      // ---------- FALLING PINK PARTICLES (Canvas) ----------
+      // ---------- FALLING PINK PARTICLES ----------
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
       let width, height;
@@ -494,14 +482,9 @@
             ctx.fillStyle = p.color;
             ctx.fillText('💖', p.x - p.size/2, p.y + p.size/3);
           }
-          
           p.y += p.speedY;
           p.x += p.speedX;
-          
-          if (p.y > height + 50) {
-            p.y = -20;
-            p.x = Math.random() * width;
-          }
+          if (p.y > height + 50) { p.y = -20; p.x = Math.random() * width; }
           if (p.x > width + 30) p.x = -20;
           if (p.x < -30) p.x = width + 20;
         }
@@ -516,7 +499,6 @@
         particles = [];
         initParticles();
       }
-
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
       drawParticles();
@@ -527,9 +509,7 @@
         countdownDisplay.textContent = count;
         countdownInterval = setInterval(() => {
           count--;
-          if (count >= 0) {
-            countdownDisplay.textContent = count;
-          }
+          if (count >= 0) countdownDisplay.textContent = count;
           if (count < 0) {
             clearInterval(countdownInterval);
             switchScreen(countdownScreen, messageScreen);
@@ -538,28 +518,19 @@
         }, 1000);
       }
 
-      function switchScreen(fromScreen, toScreen) {
-        fromScreen.classList.remove('active');
-        toScreen.classList.add('active');
+      function switchScreen(from, to) {
+        from.classList.remove('active');
+        to.classList.add('active');
       }
 
       function showMessages() {
-        happyText.style.animation = 'none';
-        happyText.offsetHeight;
-        happyText.style.animation = 'fadeSlide 0.8s forwards';
-        
+        happyText.style.animation = 'none'; happyText.offsetHeight; happyText.style.animation = 'fadeSlide 0.8s forwards';
         setTimeout(() => {
-          birthdayText.style.animation = 'none';
-          birthdayText.offsetHeight;
-          birthdayText.style.animation = 'fadeSlide 0.8s forwards';
+          birthdayText.style.animation = 'none'; birthdayText.offsetHeight; birthdayText.style.animation = 'fadeSlide 0.8s forwards';
         }, 900);
-
         setTimeout(() => {
-          nameText.style.animation = 'none';
-          nameText.offsetHeight;
-          nameText.style.animation = 'fadeSlide 0.8s forwards';
+          nameText.style.animation = 'none'; nameText.offsetHeight; nameText.style.animation = 'fadeSlide 0.8s forwards';
         }, 1800);
-
         setTimeout(() => {
           switchScreen(messageScreen, galleryScreen);
           buildThumbnails();
@@ -567,59 +538,49 @@
         }, 3500);
       }
 
-      // ---------- GALLERY / ALBUM with thumbnails ----------
+      // ---------- ALBUM ----------
       function buildThumbnails() {
         thumbnailContainer.innerHTML = '';
         PHOTO_ALBUM.forEach((src, idx) => {
           const thumb = document.createElement('div');
-          thumb.className = 'thumbnail';
-          if (idx === 0) thumb.classList.add('active-thumb');
+          thumb.className = 'thumbnail' + (idx === 0 ? ' active-thumb' : '');
           const img = document.createElement('img');
           img.src = src;
           img.alt = `Memory ${idx+1}`;
           thumb.appendChild(img);
-          thumb.addEventListener('click', () => {
-            loadGalleryImage(idx);
-          });
+          thumb.addEventListener('click', () => loadGalleryImage(idx));
           thumbnailContainer.appendChild(thumb);
         });
       }
 
       function updateThumbnailActive(index) {
-        const thumbs = document.querySelectorAll('.thumbnail');
-        thumbs.forEach((thumb, i) => {
-          if (i === index) thumb.classList.add('active-thumb');
-          else thumb.classList.remove('active-thumb');
+        document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+          thumb.classList.toggle('active-thumb', i === index);
         });
       }
 
       function loadGalleryImage(index) {
-        if (PHOTO_ALBUM.length === 0) return;
+        if (!PHOTO_ALBUM.length) return;
         currentPhotoIndex = (index + PHOTO_ALBUM.length) % PHOTO_ALBUM.length;
         galleryImage.src = PHOTO_ALBUM[currentPhotoIndex];
         photoCounter.textContent = `${currentPhotoIndex+1} / ${PHOTO_ALBUM.length}`;
         updateThumbnailActive(currentPhotoIndex);
       }
 
-      // Next photo handler with auto transition to heart after last photo
       function handleNextPhoto() {
         if (currentPhotoIndex === PHOTO_ALBUM.length - 1) {
-          // It's the last photo → go directly to heart screen
           switchScreen(galleryScreen, heartScreen);
           buildHeartGrid();
+          triggerCelebration();  // 🎉 extra surprise: confetti + floating hearts
         } else {
           loadGalleryImage(currentPhotoIndex + 1);
         }
       }
 
-      function handlePrevPhoto() {
-        loadGalleryImage(currentPhotoIndex - 1);
-      }
-
-      prevBtn.addEventListener('click', handlePrevPhoto);
+      prevBtn.addEventListener('click', () => loadGalleryImage(currentPhotoIndex - 1));
       nextBtn.addEventListener('click', handleNextPhoto);
 
-      // ---------- HEART SHAPE ----------
+      // ---------- HEART SHAPE (proper 7x7 heart) ----------
       function buildHeartGrid() {
         heartGrid.innerHTML = '';
         let imgIndex = 0;
@@ -641,7 +602,27 @@
         }
       }
 
-      // Restart experience
+      // ---------- EXTRA CELEBRATION: Confetti + Floating Hearts ----------
+      function triggerCelebration() {
+        // Confetti blast
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#ff69b4', '#ffb6c1', '#ff1493', '#ffffff'] });
+        setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.3 } }), 200);
+        setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.7 } }), 400);
+        
+        // Floating hearts animation
+        const container = document.getElementById('floatingHeartsContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < 12; i++) {
+          const heart = document.createElement('span');
+          heart.className = 'floating-heart';
+          heart.innerHTML = ['💖','💗','💓','💕','💘','❤️'][i % 6];
+          heart.style.animationDelay = `${i * 0.3}s`;
+          heart.style.fontSize = `${1.5 + Math.random()}rem`;
+          container.appendChild(heart);
+        }
+      }
+
+      // Restart
       restartBtn.addEventListener('click', () => {
         clearInterval(countdownInterval);
         switchScreen(heartScreen, countdownScreen);
@@ -653,12 +634,9 @@
         startCountdown();
       });
 
-      // ---------- START THE APP ----------
+      // Preload images
       window.addEventListener('load', () => {
-        // Preload images
-        PHOTO_ALBUM.forEach(src => { const img = new Image(); img.src = src; });
-        HEART_IMAGES.forEach(src => { const img = new Image(); img.src = src; });
-        
+        [...PHOTO_ALBUM, ...HEART_IMAGES].forEach(src => { const img = new Image(); img.src = src; });
         startCountdown();
       });
 
